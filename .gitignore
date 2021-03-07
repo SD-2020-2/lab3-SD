@@ -39,6 +39,8 @@ build/Release
 
 # Dependency directories
 node_modules/
+instance_mongo/node_modules/
+middleware/node_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files
