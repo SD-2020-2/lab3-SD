@@ -11,4 +11,5 @@ RUN npm install
 COPY instance-mongo/. .
 
 EXPOSE 2000
+
 CMD [ "node", "app.js" ]
