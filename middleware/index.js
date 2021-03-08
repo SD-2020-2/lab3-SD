@@ -44,5 +44,5 @@ setInterval(() => {
 
 
 app.listen(port, () => {
-	console.log(`App listening in the port: ${port}`);
+	console.log(`Middleware listening on port: ${port}`);
 });
