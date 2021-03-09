@@ -15,5 +15,7 @@ docker build -t instancia-mongo .
 
 docker run -p 2000:2000 -d --network host instancia-mongo
 
+docker rm $(docker container ls --latest --quiet)
+
 echo "Instancia creada !"
 echo "-------------------------------------------------"

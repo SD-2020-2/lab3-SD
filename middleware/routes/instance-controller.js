@@ -1,15 +1,22 @@
-const { createInstance } = require('../scripts/execute-scripts');
+const { createInstance, checkStatus } = require('../scripts/execute-scripts');
 
-const getInstance = (req = Request, res = Response) => {
-	res.status(200).send('Instancia ...');
+const checkInstanceStatus = () => {
+	return checkStatus();
 };
 
-const postInstance = (req = Request, res = Response) => {
+const getInstance = (req = Request, res = Response) => {
+	res.status(200).send({
+		ip: '172.17.0.1',
+		status: checkStatus(),
+	});
+};
+
+const postInstance = () => {
 	createInstance();
-	res.sendStatus(200);
 };
 
 module.exports = {
+	checkInstanceStatus,
 	getInstance,
 	postInstance,
 };
