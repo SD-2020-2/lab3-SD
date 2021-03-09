@@ -39,7 +39,8 @@ build/Release
 
 # Dependency directories
 node_modules/
-instance_mongo/node_modules/
+instance-mongo/dump/
+instance-mongo/node_modules/
 middleware/node_modules/
 jspm_packages/
 

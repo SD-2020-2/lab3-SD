@@ -19,6 +19,7 @@ setInterval(() => {
 	let isOK = checkInstanceStatus();
 	if (isOK) {
 		console.log('Instancia OK ✔ 🔛', '\n');
+		//crear copia db
 	} else {
 		console.log('Instancia caida !! ❌', '\n');
 		console.log('Creando instancia auxiliar ...');
