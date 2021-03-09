@@ -34,6 +34,7 @@ const postUser = (req = Request, res = Response) => {
 	// 	})
 	// 	.catch((error) => console.log('error en post usuario'));
 
+	console.log(req.body);
 	res.sendStatus(200);
 };
 
