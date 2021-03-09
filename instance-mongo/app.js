@@ -1,21 +1,30 @@
 const express = require('express');
 const app = express();
-const port = 2000;
+const port = 4000;
 const clientMongo = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/';
 var exec = require('child_process').exec;
 // Nombre de bd
 const dbName = 'names';
-let array = [];
+var array = [];
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.post('/users', (req, res) => {
 	clientMongo.connect(url, { useUnifiedTopology: true }, function (err, db) {
+		if (err) throw err;
+
 		var dbo = db.db('names');
 		const names = dbo.collection('names');
 		// create a document to be inserted
-		const doc = { ID: '1024453232', name: 'Federico xD' };
+		const doc = {
+			ID: req.body.id,
+			NOMBRE: req.body.name,
+		};
 		const result = names.insertOne(doc);
 		console.log('fue agregado con exito el documento');
+		res.sendStatus(200);
 	});
 
 	exec('mongodump', (err, stdout, stderr) => {
@@ -25,44 +34,38 @@ app.post('/users', (req, res) => {
 		}
 	});
 });
+
 // Conexión URL (estas corriendo en local :D)
-function getConnect(infoName) {
-	clientMongo.connect(
-		url,
-		{
-			useUnifiedTopology: true,
-		},
-		function (err, db) {
-			if (err) throw err;
-			var dbo = db.db(infoName);
-			dbo
-				.collection('names')
-				.find({})
-				.toArray(function (err, result) {
-					if (err) throw err;
-					array = result;
-					db.close();
-				});
-		}
-	);
-}
+clientMongo.connect(
+	url,
+	{
+		useUnifiedTopology: true,
+	},
+	function (err, db) {
+		if (err) throw err;
+		var dbo = db.db('names');
+		dbo
+			.collection('names')
+			.find({})
+			.toArray(function (err, result) {
+				if (err) throw err;
+				console.log('lelnado db');
+				array = result;
+				db.close();
+			});
+	}
+);
+
 app.get('/', (req, res) => {
 	res.send('Llego xD');
 });
 
 // Conectamos al servidor
 app.get('/users', (req, res) => {
-	res.send('Llego xD');
-	for (let i = 0; i < array.length; i++) {
-		if (array[i] != undefined) {
-			console.log(array[i].NOMBRE);
-		}
-	}
-	//copia de la base de datos a archivos, saca información
-	//namesAux sera el nombre de la nueva base de datos
-	//
-	
-	getConnect('names');
+	console.log('Largo array');
+	console.log(array.length);
+
+	res.send(array);
 });
 
 app.get('/restore', (req, res) => {

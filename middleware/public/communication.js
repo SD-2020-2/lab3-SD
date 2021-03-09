@@ -4,7 +4,7 @@ const id_user = document.querySelector('#user_id');
 //
 const createUser = function () {
 	console.log('create');
-	let userName = { id_user: id_user.value, name: name_user.value };
+	let userName = { id: id_user.value, name: name_user.value };
 	let options = {
 		method: 'POST',
 		headers: { 'Content-type': 'application/json' },
@@ -26,8 +26,8 @@ const getList = function () {
 			var panel = document.createElement('div');
 			data.forEach((element) => {
 				var card = document.createElement('h1');
-				card.innerText = element.id;
-				card.innerText = element.name;
+				card.innerText = element.ID;
+				card.innerText = element.NOMBRE;
 				panel.appendChild(card);
 			});
 			var body = document.getElementById('main');
