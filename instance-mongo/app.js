@@ -8,7 +8,7 @@ var exec = require('child_process').exec;
 const dbName = 'names';
 let array = [];
 
-app.get('/fill', (req, res) => {
+app.post('/users', (req, res) => {
 	clientMongo.connect(url, { useUnifiedTopology: true }, function (err, db) {
 		var dbo = db.db('names');
 		const names = dbo.collection('names');
@@ -46,9 +46,12 @@ function getConnect(infoName) {
 		}
 	);
 }
+app.get('/', (req, res) => {
+	res.send('Llego xD');
+});
 
 // Conectamos al servidor
-app.get('/crear', (req, res) => {
+app.get('/users', (req, res) => {
 	res.send('Llego xD');
 	for (let i = 0; i < array.length; i++) {
 		if (array[i] != undefined) {
@@ -58,6 +61,11 @@ app.get('/crear', (req, res) => {
 	//copia de la base de datos a archivos, saca información
 	//namesAux sera el nombre de la nueva base de datos
 	//
+	
+	getConnect('names');
+});
+
+app.get('/restore', (req, res) => {
 	exec('mongorestore -h 127.0.0.1:27017 -d namesAux ../instance-mongo/dump/names', (err, stdout, stderr) => {
 		if (err) {
 			console.error(`exec error: ${err}`);
@@ -66,16 +74,6 @@ app.get('/crear', (req, res) => {
 		console.log(`stdout: ${stdout}`);
 		console.log(`stderr: ${stderr}`);
 	});
-	getConnect('names');
-});
-
-app.get('/rellenar', (req, res) => {
-	getConnect('nameAux');
-	for (let i = 0; i < array.length; i++) {
-		if (array[i] != undefined) {
-			console.log(array[i].NOMBRE);
-		}
-	}
 });
 
 app.listen(port, () => {
