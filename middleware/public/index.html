@@ -7,6 +7,9 @@
 </head>
 
 <body id="main">
+    <div>
+        <h1 class="ipContenedor">ip contenedor:{{ number }}</h1>
+    </div>
     <form class="form">
         <div class="nameLabel">
             <label for="inputNumero">
@@ -25,6 +28,19 @@
         </div>
 
     </form>
+
+    <table id="userinfo">
+        <tr>
+            <th scope="col">Documento </th>
+            <th scope="col">Nombre</th>
+        </tr>
+
+        <tr v-for="server,index in userList">
+            <td>{{server.ID}}</td>
+            <td>{{server.NOMBRE}}</td>
+        </tr>
+
+    </table>
     <script src="communication.js"></script>
     <script src=" https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </body>

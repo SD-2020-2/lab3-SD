@@ -46,10 +46,11 @@ body {
 }
 
 #buttons {
-    margin-top: 20px;
+    padding: 20px 20px 0px 5px;
 }
 
 .form {
+    /* box-shadow: 2px 10px 50px 2px #164958; */
     background-color: white;
     border-radius: 10px;
     box-shadow: 5px 20px 50px 15px #164958;
@@ -64,26 +65,70 @@ body {
     display: none;
 }
 
-.name-url {
-    border: 2px solid #CED6E0;
-    border-radius: 5px;
+.form label {
+    color: black;
+    margin-bottom: 8px;
     font-size: 16px;
-    height: 40px;
-    margin-top: 20px;
-    padding: 3px 12px;
-    width: 60%;
 }
 
 .nameLabel {
-    display: block;
-    color: black;
-    margin-bottom: 5px;
-    font-size: 16px;
-    margin-top: 10px;
+    text-align: left;
+    padding: 30px 20px 0px 30px;
+}
+
+.form input {
+    border: 2px solid #CED6E0;
+    font-size: 18px;
+    height: 40px;
+    width: 90%;
+    padding: 20px 12px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.form input:hover {
+    border: 2px solid #93BDED;
+}
+
+.form input:focus {
+    outline: rgb(4, 4, 4);
+    box-shadow: 1px 7px 10px -5px rgba(90, 116, 148, 0.3);
 }
 
 .titulo {
     color: rgb(70, 16, 16);
     font-family: 'Dancing Script', cursive;
     font-size: 30px;
+}
+
+table {
+    background-color: white;
+    text-align: center;
+    width: 40%;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+th, td {
+    border-collapse: collapse;
+    margin: 15px;
+}
+
+th {
+    background-color: darkcyan;
+    font-size: 20px;
+    text-align: center;
+}
+
+td {
+    text-align: left;
+}
+
+.ipContenedor {
+    text-align: center;
+    color: blanchedalmond;
+    margin-bottom: 8px;
+    font-size: 25px;
 }

@@ -1,39 +1,38 @@
-const name_user = document.querySelector('#name');
-const id_user = document.querySelector('#user_id');
+const name_user = document.querySelector("#name");
+const id_user = document.querySelector("#user_id");
 
 //
 const createUser = function () {
-	console.log('create');
-	let userName = { id: id_user.value, name: name_user.value };
-	let options = {
-		method: 'POST',
-		headers: { 'Content-type': 'application/json' },
-		body: JSON.stringify(userName),
-	};
+  console.log("create");
+  let userName = { id: id_user.value, name: name_user.value };
+  let options = {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(userName),
+  };
 
-	fetch('/users', options)
-		.then((response) => response.json())
-		.then((data) => console.log(data));
+  fetch("/users", options)
+    .then((response) => response.json())
+    .then((data) => console.log(data));
 };
 
 // obtiene la lista de usuarios
-const getList = function () {
-	console.log('Get list');
-	fetch('/users')
-		.then((response) => response.json())
-		.then((data) => {
-			console.log(data);
-			var panel = document.createElement('div');
-			data.forEach((element) => {
-				var card = document.createElement('h1');
-				card.innerText = element.ID;
-				card.innerText = element.NOMBRE;
-				panel.appendChild(card);
-			});
-			var body = document.getElementById('main');
-			body.appendChild(panel);
-		});
-};
+
+function getList() {
+  fetch("/users")
+    .then((response) => response.json())
+    .then((obj) => (servidores.userList = obj))
+    .catch((error) => console.log(error));
+}
+
+var servidores = new Vue({
+  el: "#userinfo",
+  data() {
+    return {
+      userList: [],
+    };
+  },
+});
 
 // const btnAdd = document.querySelector('.btn_Add');
 // btnAdd.addEventListener('click', (event) => {
@@ -41,10 +40,10 @@ const getList = function () {
 // 	createUser();
 // });
 
-const form = document.querySelector('.form');
-form.addEventListener('submit', (event) => {
-	event.preventDefault();
-	createUser();
+const form = document.querySelector(".form");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  createUser();
 });
-const buttonGet = document.querySelector('.btn_getList');
-buttonGet.addEventListener('click', getList);
+const buttonGet = document.querySelector(".btn_getList");
+buttonGet.addEventListener("click", getList);
