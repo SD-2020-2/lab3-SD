@@ -42,6 +42,7 @@ node_modules/
 instance-mongo/dump/
 instance-mongo/node_modules/
 middleware/node_modules/
+middleware/dump
 jspm_packages/
 
 # TypeScript v1 declaration files

@@ -1,4 +1,6 @@
 const axios = require('axios');
+const { backUpdatabase } = require('../db/db-manager');
+
 const serverIP = '172.17.0.1';
 
 const getUsers = (req = Request, res = Response) => {
@@ -19,6 +21,8 @@ const postUser = (req = Request, res = Response) => {
 			res.sendStatus(300);
 			console.log('error en post usuario');
 		});
+
+	// backUpdatabase();
 };
 
 module.exports = {

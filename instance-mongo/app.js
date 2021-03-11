@@ -26,13 +26,6 @@ app.post('/users', (req, res) => {
 		console.log('fue agregado con exito el documento');
 		res.sendStatus(200);
 	});
-
-	exec('mongodump', (err, stdout, stderr) => {
-		if (err) {
-			console.error(`exec error: ${err}`);
-			return;
-		}
-	});
 });
 
 // Conexión URL (estas corriendo en local :D)
@@ -87,17 +80,6 @@ app.get('/users', async (req, res) => {
 	await refreshUsersList();
 
 	res.send(array);
-});
-
-app.get('/restore', (req, res) => {
-	exec('mongorestore -h 127.0.0.1:27017 -d namesAux ../instance-mongo/dump/names', (err, stdout, stderr) => {
-		if (err) {
-			console.error(`exec error: ${err}`);
-			return;
-		}
-		console.log(`stdout: ${stdout}`);
-		console.log(`stderr: ${stderr}`);
-	});
 });
 
 app.listen(port, () => {
