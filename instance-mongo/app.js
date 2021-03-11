@@ -56,14 +56,35 @@ clientMongo.connect(
 	}
 );
 
+const refreshUsersList = async () => {
+	await clientMongo.connect(
+		url,
+		{
+			useUnifiedTopology: true,
+		},
+		function (err, db) {
+			if (err) throw err;
+			var dbo = db.db('names');
+			dbo
+				.collection('names')
+				.find({})
+				.toArray(function (err, result) {
+					if (err) throw err;
+					console.log('lelnado db');
+					array = result;
+					db.close();
+				});
+		}
+	);
+};
+
 app.get('/', (req, res) => {
 	res.send('Llego xD');
 });
 
 // Conectamos al servidor
-app.get('/users', (req, res) => {
-	console.log('Largo array');
-	console.log(array.length);
+app.get('/users', async (req, res) => {
+	await refreshUsersList();
 
 	res.send(array);
 });
